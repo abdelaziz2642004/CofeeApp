@@ -8,10 +8,11 @@ class BackgroundLayout extends StatelessWidget {
     return Column(
       children: [
         Expanded(
+          flex: 11,
           child: Container(color: const Color(0xFF222222)), // Top half
         ),
         Expanded(
-          flex: 2,
+          flex: 25,
           child: Container(color: Colors.white), // Bottom half
         ),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/CoffeeCard.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/searchBar.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/background_layout.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/locationDropDown.dart';
@@ -33,6 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   SizedBox(height: 20),
                   searchBar(),
+                  SizedBox(height: 30),
+
+                  // turn this into a stack with promo and other texts
+                  Coffeecard(),
                 ],
               ),
             ),
