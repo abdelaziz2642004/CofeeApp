@@ -13,7 +13,7 @@ class BackgroundLayout extends StatelessWidget {
         ),
         Expanded(
           flex: 25,
-          child: Container(color: Colors.white), // Bottom half
+          child: Container(color: Color(0xfff9f9f9)), // Bottom half
         ),
       ],
     );

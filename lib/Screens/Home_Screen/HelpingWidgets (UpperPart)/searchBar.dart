@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class searchBar extends StatelessWidget {
   const searchBar({super.key});
@@ -12,7 +13,7 @@ class searchBar extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Search coffee',
               hintStyle: TextStyle(color: Colors.white54),
-              prefixIcon: Icon(Icons.search, color: Colors.white),
+              prefixIcon: Icon(Icons.search, color: Color(0xffebebeb)),
               filled: true,
               fillColor: Color(0xff2e2e2e), // Dark background
               contentPadding: EdgeInsets.symmetric(vertical: 18),
@@ -34,7 +35,16 @@ class searchBar extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {},
-            icon: Icon(Icons.tune, color: Colors.white),
+            icon: SvgPicture.asset(
+              width: 30,
+              height: 30,
+              'assets/icons/tune.svg', // Your SVG file path
+
+              colorFilter: ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ), // Apply color if needed
+            ),
           ),
         ),
       ],
