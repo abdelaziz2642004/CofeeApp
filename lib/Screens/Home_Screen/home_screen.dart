@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:prj/DummyData.dart';
+import 'package:prj/Models/Coffee.dart';
+import 'package:prj/Models/category.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWIdgets(BottomPart)/CatList.dart';
-import 'package:prj/Screens/Home_Screen/HelpingWIdgets(BottomPart)/CoffeeItem.dart';
-
+import 'package:prj/Screens/Home_Screen/HelpingWIdgets(BottomPart)/GridView.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/OfferCard.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/searchBar.dart';
 import 'package:prj/Screens/Home_Screen/HelpingWidgets%20(UpperPart)/background_layout.dart';
@@ -18,10 +21,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _index = 0;
-  void rebuild(int index) {
+  category cat = categories[0];
+  List<Coffee> selectedCoffees = coffees;
+
+  void rebuild(category newCat) {
     setState(() {
-      _index = index;
+      cat = newCat;
+      // get all the coffee items that are in the selected category
+      selectedCoffees =
+          coffees
+              .where((element) => element.categoryIDs.any((id) => id == cat.id))
+              .toList();
     });
   }
 
@@ -45,35 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   const SizedBox(height: 20),
+
                   const searchBar(),
+
                   const SizedBox(height: 30),
+
                   const Coffeecard(),
-                  SizedBox(height: 20),
 
-                  Catlist(index: _index, rebuild: rebuild),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-                  Expanded(
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                            2, // How many elements next to each other in one row
-                        crossAxisSpacing: 25,
-                        mainAxisSpacing: 25,
-                        childAspectRatio:
-                            0.67, // Adjust this value based on the desired height/width ratio
-                      ),
-                      itemCount: 20, // Number of cards
-                      itemBuilder: (context, index) {
-                        return CoffeeItem(
-                          name: "Caffe Mocha",
-                          cat: "Deep Foam",
-                          price: 4.53,
-                          rating: 2.5,
-                        );
-                      },
-                    ),
-                  ),
+                  Catlist(cat: cat, rebuild: rebuild),
+
+                  const SizedBox(height: 20),
+
+                  Gridview(selectedCoffees: selectedCoffees),
                 ],
               ),
             ),

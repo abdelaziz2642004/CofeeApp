@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:prj/DummyData.dart';
+import 'package:prj/Models/category.dart';
 
 // we made this stateful , why ?
 // because instead of completely rebuilding the home_screen !!
@@ -7,29 +9,26 @@ import 'package:flutter/material.dart';
 class Catlist extends StatelessWidget {
   const Catlist({
     super.key,
-    required void Function(int)? rebuild,
-    required int index,
-  }) : _index = index,
-       _rebuild = rebuild;
-  final void Function(int)? _rebuild;
-  final int _index;
+    required void Function(category)? rebuild,
+    required this.cat,
+  }) : _rebuild = rebuild;
+  final void Function(category)? _rebuild;
+  final category cat;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return SizedBox(
       height: 30,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 200, // Number of list items
+        itemCount: categories.length, // Number of list items
         itemBuilder: (context, index) {
-          bool isSelected = _index == index;
+          bool isSelected = cat == categories[index];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: GestureDetector(
               onTap: () {
-                _rebuild!(index);
+                _rebuild!(categories[index]);
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7),
@@ -45,7 +44,7 @@ class Catlist extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "Category ${index + 1}",
+                    categories[index].name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isSelected ? Colors.white : Color(0xff3f3f3f),

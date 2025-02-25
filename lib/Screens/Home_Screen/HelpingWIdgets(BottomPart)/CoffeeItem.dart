@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:prj/DummyData.dart';
+import 'package:prj/Models/Coffee.dart';
 
 class CoffeeItem extends StatelessWidget {
-  final String name;
-  final String cat;
-  final double price;
-  final double rating;
+  // final String name;
+  // final String cat;
+  // final double price;
+  // final double rating;
+  // final Image url;
 
-  const CoffeeItem({
-    super.key,
-    required this.name,
-    required this.cat,
+  final Coffee coffee;
 
-    required this.price,
-    required this.rating,
-  });
+  const CoffeeItem({super.key, required this.coffee});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +25,8 @@ class CoffeeItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              "assets/images/2.jpeg", // Replace with your image path
+            child: Image.network(
+              coffee.imageUrl, // Replace with your image path
               height: 140,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -48,7 +46,7 @@ class CoffeeItem extends StatelessWidget {
                   const Icon(Icons.star, color: Colors.yellow, size: 16),
                   const SizedBox(width: 4),
                   Text(
-                    rating.toString(),
+                    coffee.rating.toString(),
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -65,7 +63,7 @@ class CoffeeItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  coffee.name,
                   style: TextStyle(
                     color: Color(0xff3f3f3f),
                     fontWeight: FontWeight.bold,
@@ -73,7 +71,12 @@ class CoffeeItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  cat,
+                  categories
+                      .firstWhere(
+                        (category) => category.id == coffee.categoryIDs[0],
+                      )
+                      .name,
+
                   style: TextStyle(
                     color: Color(0xffb5b5b5),
                     fontWeight: FontWeight.bold,
@@ -85,7 +88,7 @@ class CoffeeItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "\$ " + price.toString(),
+                      "\$ " + coffee.price.toString(),
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,

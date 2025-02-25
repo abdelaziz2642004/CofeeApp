@@ -1,37 +1,26 @@
-enum fast_delivery { slow, mediumSpeed, fast }
+import 'package:uuid/uuid.dart';
 
-enum Affordability { affordable, pricey, luxurious }
+final Uuid uuid = Uuid();
 
 class Coffee {
-  Coffee({
-    required this.id,
-    required this.categories,
-    required this.title,
-    required this.imageUrl,
-    required this.ingredients,
-    required this.steps,
-    required this.duration,
-    required this.affordability,
-    required this.isGlutenFree,
-    required this.isLactoseFree,
-    required this.isVegan,
-    required this.isVegetarian,
-    required this.total,
-  });
-
-  final String id;
-  final List<String> categories;
-  final String title;
+  final String _id;
+  final String name;
+  final String description;
+  final double rating;
+  final double price;
   final String imageUrl;
   final List<String> ingredients;
-  final List<String> steps;
-  final int duration;
-  final Affordability affordability;
-  final bool isGlutenFree;
-  final bool isLactoseFree;
-  final bool isVegan;
-  final bool isVegetarian;
-  int total;
-}
+  final List<String> categoryIDs;
 
-enum Filters { gluten, lactose, vegetarian, vegan }
+  Coffee({
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.imageUrl,
+    required this.ingredients,
+    required this.categoryIDs,
+    required this.rating,
+  }) : _id = uuid.v4();
+
+  String get id => _id;
+}
