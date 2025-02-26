@@ -24,7 +24,7 @@ style: TextStyle(fontSize: 16) → This applies a font size of 16 to the text.
 */
 
 class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
-  String selectedSize = 'M';
+  String selectedSize = 'S';
   bool isFavorite = true;
   bool isExpanded = false;
   bool isOverflowing = false;
@@ -101,6 +101,8 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                       onToggleExpand: onToggleExpand,
                       isOverflowing: isOverflowing,
                     ),
+
+                    // ANOTHER OPTION FOR Quantity
                     const SizedBox(height: 14),
                     ...SizeSelector(
                       selectedSize: selectedSize,
@@ -111,7 +113,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
               ),
             ),
 
-            Addtocart(coffee: widget.coffee),
+            Addtocart(coffee: widget.coffee, size: selectedSize),
           ],
         ),
       ),

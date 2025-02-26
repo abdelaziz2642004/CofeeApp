@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:prj/Models/Coffee.dart';
 
 class Addtocart extends StatelessWidget {
-  const Addtocart({super.key, required this.coffee});
+  const Addtocart({super.key, required this.coffee, required this.size});
   final Coffee coffee;
+  final String size;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -39,7 +40,11 @@ class Addtocart extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "\$ ${coffee.price}",
+                      size == 'L'
+                          ? "\$ ${coffee.price * 2}"
+                          : size == 'M'
+                          ? "\$ ${coffee.price * 1.5}"
+                          : "\$ ${coffee.price}",
                       style: const TextStyle(
                         color: Color(0xffc47c51),
                         fontWeight: FontWeight.normal,

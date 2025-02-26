@@ -1,7 +1,5 @@
 import 'package:uuid/uuid.dart';
 
-final Uuid uuid = Uuid();
-
 class Coffee {
   final String _id;
   String _name;
@@ -9,7 +7,6 @@ class Coffee {
   double _rating;
   double _price;
   String _imageUrl;
-  List<String> _ingredients;
   List<String> _categoryIDs;
   int _ratingCount = 89;
 
@@ -24,17 +21,15 @@ class Coffee {
     required String description,
     required double price,
     required String imageUrl,
-    required List<String> ingredients,
     required List<String> categoryIDs,
     required double rating,
   }) : _name = name,
        _description = description,
        _price = price,
        _imageUrl = imageUrl,
-       _ingredients = ingredients,
        _categoryIDs = categoryIDs,
        _rating = rating,
-       _id = uuid.v4();
+       _id = Uuid().v4();
 
   String get id => _id;
 
@@ -49,8 +44,6 @@ class Coffee {
   double get price => _price;
 
   String get imageUrl => _imageUrl;
-
-  List<String> get ingredients => _ingredients;
 
   List<String> get categoryIDs => _categoryIDs;
 

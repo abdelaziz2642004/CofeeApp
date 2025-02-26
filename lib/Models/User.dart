@@ -1,3 +1,4 @@
+import 'package:prj/Models/WishList.dart';
 import 'package:prj/Models/WishlistItem.dart';
 
 /*
@@ -12,7 +13,7 @@ class user {
   final String name;
   final String email;
   final String phoneNumber;
-  List<WishlistItem> wishlist = [];
+  final Wishlist wishlist;
   List<String> favorited = [];
 
   user({
@@ -20,5 +21,6 @@ class user {
     required this.name,
     required this.email,
     required this.phoneNumber,
+    required this.wishlist,
   });
 }
