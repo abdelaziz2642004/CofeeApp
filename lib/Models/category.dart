@@ -8,5 +8,5 @@ class category {
 
   String get id => _id;
 
-  category({required this.name}) : _id = uuid.v4();
+  category({required this.name, String? id}) : _id = id ?? uuid.v4();
 }

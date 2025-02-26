@@ -66,8 +66,29 @@ flutter:
     - assets/images/3.jpeg
     - assets/images/4.jpeg
     - assets/images/Profile.png
+    
     - assets/icons/tune.svg
-    - assets/icons/search.svg
+    - assets/icons/heart.svg
+
+    - assets/icons/milk.svg
+    - assets/icons/sugar.svg
+    # - assets/icons/organic.svg
+    - assets/icons/decaf.svg
+    - assets/icons/beans.svg
+    - assets/icons/nuts.svg
+
+
+
+  fonts:
+    - family: DopisBold
+      fonts:
+        - asset: assets/fonts/Dopis-Bold.ttf
+
+    - family:  AlongSanss
+      fonts:
+          - asset : assets/fonts/AlongSanss2-light.otf
+    
+  
 
 
 

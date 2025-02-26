@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:prj/Screens/Home_Screen/home_screen.dart';
+import 'package:prj/Screens/Tabs%20(%20Screen%20Chooser%20)/tabs.dart';
 
 void main() {
+  // start();
   runApp(const MyApp());
 }
 
@@ -10,6 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyHomePage());
+    return const MaterialApp(home: TabsScreen());
   }
 }

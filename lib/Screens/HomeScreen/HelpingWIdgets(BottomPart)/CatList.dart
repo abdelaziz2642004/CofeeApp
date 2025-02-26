@@ -35,18 +35,14 @@ class Catlist extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isSelected ? Color(0xffc47c51) : Colors.white,
                   borderRadius: BorderRadius.circular(7),
-                  boxShadow:
-                      isSelected
-                          ? []
-                          : [
-                            BoxShadow(color: Colors.transparent),
-                          ], // No outline
                 ),
                 child: Center(
                   child: Text(
                     categories[index].name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontFamily: "DopisBold",
+                      fontSize: 16,
                       color: isSelected ? Colors.white : Color(0xff3f3f3f),
                     ),
                   ),
