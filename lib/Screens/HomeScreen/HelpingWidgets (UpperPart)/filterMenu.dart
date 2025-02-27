@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class FilterMenu extends StatefulWidget {
   const FilterMenu({super.key});
-
   @override
   State<FilterMenu> createState() => _FilterMenuState();
 }
@@ -37,65 +36,75 @@ class _FilterMenuState extends State<FilterMenu> {
     });
   }
 
+  void _showFilterDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('Filter Options'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildSwitchTile('Sugary', isSugary, setState),
+                  _buildSwitchTile('Dairy', isDairy, setState),
+                  _buildSwitchTile('Decaf', isDecaf, setState),
+                  _buildSwitchTile('Contains Nuts', containsNuts, setState),
+                  _buildSwitchTile(
+                    'Contains Caffeine',
+                    containsCaffeine,
+                    setState,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Close'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildSwitchTile(
+    String label,
+    bool value,
+    void Function(void Function()) setState,
+  ) {
+    return SwitchListTile(
+      title: Text(label),
+      value: value,
+      onChanged: (newValue) {
+        setState(() {
+          onChanged(label, newValue);
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 55,
       width: 55,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 196, 124, 72),
+        color: const Color.fromARGB(255, 196, 124, 72),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: PopupMenuButton<String>(
+      child: IconButton(
         icon: SvgPicture.asset(
           'assets/icons/tune.svg',
           width: 28,
           height: 28,
-          colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
-        itemBuilder:
-            (BuildContext context) => [
-              _buildMenuItem('Sugary', isSugary),
-              _buildMenuItem('Dairy', isDairy),
-              _buildMenuItem('Decaf', isDecaf),
-              _buildMenuItem('Contains Nuts', containsNuts),
-              _buildMenuItem('Contains Caffeine', containsCaffeine),
-            ],
-        onSelected: (String key) {
-          onChanged(key, !_getValue(key));
-        },
+        onPressed: () => _showFilterDialog(context),
       ),
     );
-  }
-
-  PopupMenuItem<String> _buildMenuItem(String label, bool value) {
-    return PopupMenuItem(
-      value: label,
-      child: SwitchListTile(
-        title: Text(label),
-        value: value,
-        onChanged: (newValue) {
-          setState(() => onChanged(label, newValue));
-          setState(() {}); // Rebuild the whole widget to reflect changes
-        },
-      ),
-    );
-  }
-
-  bool _getValue(String key) {
-    switch (key) {
-      case 'Sugary':
-        return isSugary;
-      case 'Dairy':
-        return isDairy;
-      case 'Decaf':
-        return isDecaf;
-      case 'Contains Nuts':
-        return containsNuts;
-      case 'Contains Caffeine':
-        return containsCaffeine;
-      default:
-        return false;
-    }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prj/Screens/WishListScreen/HelpingWidgets/Item/Item.dart';
+import 'package:prj/Screens/WishListScreen/HelpingWidgets/WishlistItem/WishlistItem.dart';
 import 'package:prj/Screens/WishListScreen/HelpingWidgets/Logic.dart';
 import 'package:prj/Screens/WishListScreen/HelpingWidgets/finish/finish.dart';
 
