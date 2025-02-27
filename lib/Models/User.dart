@@ -1,3 +1,4 @@
+import 'package:prj/Models/Notification.dart';
 import 'package:prj/Models/WishList.dart';
 
 /*
@@ -9,17 +10,20 @@ If you're using NoSQL(Firebase :D), store the wishlist as a list inside the user
 
 class user {
   final String id;
-  final String name;
   final String email;
-  final String phoneNumber;
+  final String UserName;
+  final String ImageUrl;
+  final String fullName;
   final Wishlist wishlist;
   List<String> favorited = [];
+  List<notification> notifications = [];
 
   user({
     required this.id,
-    required this.name,
     required this.email,
-    required this.phoneNumber,
     required this.wishlist,
+    required this.ImageUrl,
+    required this.UserName,
+    required this.fullName,
   });
 }

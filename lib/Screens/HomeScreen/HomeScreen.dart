@@ -5,6 +5,7 @@ import 'package:prj/Models/category.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/CatList.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/GridView.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/OfferCard.dart';
+import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/filterMenu.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/searchBar.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/background_layout.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/locationDropDown.dart';
@@ -22,6 +23,12 @@ class Homescreen extends StatefulWidget {
 class _MyHomePageState extends State<Homescreen> {
   category cat = categories[0];
   List<Coffee> selectedCoffees = coffees;
+
+  bool isSugary = true;
+  bool isDairy = false;
+  bool isDecaf = false;
+  bool containsNuts = false;
+  bool containsCaffeine = true;
 
   void rebuild(category newCat) {
     setState(() {
@@ -55,11 +62,18 @@ class _MyHomePageState extends State<Homescreen> {
               ),
               const SizedBox(height: 20),
 
-              const searchBar(),
+              Row(
+                children: [Expanded(child: searchBar()), FilterMenu()],
+              ), // WHAT THE HELL HOW LOL
 
               const SizedBox(height: 30),
 
-              const Offercard(),
+              GestureDetector(
+                onTap: () {
+                  // go to notifications screen
+                },
+                child: const Offercard(),
+              ),
 
               const SizedBox(height: 20),
 

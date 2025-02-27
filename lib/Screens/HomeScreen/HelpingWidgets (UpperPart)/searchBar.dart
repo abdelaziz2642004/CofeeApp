@@ -1,52 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:prj/Screens/SearchScreen/SearchScreen.dart';
 
 class searchBar extends StatelessWidget {
   const searchBar({super.key});
+
+  void _navigateToSearchScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchScreen(),
+      ), // Replace with your search screen
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search coffee',
-              hintStyle: TextStyle(color: Colors.white54),
-              prefixIcon: Icon(Icons.search, color: Color(0xffebebeb)),
-              filled: true,
-              fillColor: Color(0xff2e2e2e), // Dark background
-              contentPadding: EdgeInsets.symmetric(vertical: 18),
-              border: OutlineInputBorder(
+          child: InkWell(
+            onTap: () => _navigateToSearchScreen(context),
+            borderRadius: BorderRadius.circular(14),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 18),
+              decoration: BoxDecoration(
+                color: Color(0xff2e2e2e),
                 borderRadius: BorderRadius.circular(14),
-                borderSide: BorderSide.none, // No visible border
+              ),
+              child: Row(
+                children: [
+                  SizedBox(width: 16),
+                  Icon(Icons.search, color: Color(0xffebebeb)),
+                  SizedBox(width: 12),
+                  Text(
+                    'Search coffee',
+                    style: TextStyle(color: Colors.white54, fontSize: 16),
+                  ),
+                ],
               ),
             ),
-            style: TextStyle(color: Colors.white),
           ),
         ),
         SizedBox(width: 17),
-        Container(
-          height: 59,
-          width: 59,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 196, 124, 72), // Custom brownish color
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              width: 30,
-              height: 30,
-              'assets/icons/tune.svg', // Your SVG file path
-
-              colorFilter: ColorFilter.mode(
-                Colors.white,
-                BlendMode.srcIn,
-              ), // Apply color if needed
-            ),
-          ),
-        ),
       ],
     );
   }

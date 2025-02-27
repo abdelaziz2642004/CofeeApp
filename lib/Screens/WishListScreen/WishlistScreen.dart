@@ -35,84 +35,91 @@ class _wishlistscreenState extends State<wishlistscreen> {
 
     // print(wishlist);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        title: Text(
-          'Wishlist',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontFamily: 'DopisBold',
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Items (${wishlist.length})',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'DopisBold',
-                  ),
-                ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      currentUser.wishlist.Finish();
-                    });
-                  },
-                  icon: Icon(Icons.delete_outline),
-                  color: Color(0xffc47c51),
-                ),
-              ],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            'Wishlist',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'DopisBold',
             ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: wishlist.length,
-                itemBuilder: (context, index) {
-                  Coffee coffee = wishlist[index].coffee;
-                  print(wishlist[index].size);
-                  return Dismissible(
-                    key: Key(wishlist[index].coffee.toString()),
-                    direction: DismissDirection.endToStart,
-                    background: Container(
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsets.only(right: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(Icons.delete, color: Colors.white, size: 30),
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Items (${wishlist.length})',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'DopisBold',
                     ),
-                    onDismissed: (direction) {
+                  ),
+                  Spacer(),
+                  IconButton(
+                    onPressed: () {
                       setState(() {
-                        wishlist.removeAt(index);
+                        currentUser.wishlist.Finish();
                       });
                     },
-
-                    child: CartItemCard(
-                      item: wishlist[index],
-                      coffee: coffee,
-                      rebuildWidget: rebuildWidget,
-                    ),
-                  );
-                },
+                    icon: Icon(Icons.delete_outline),
+                    color: Color(0xffc47c51),
+                  ),
+                ],
               ),
-            ),
+              SizedBox(height: 10),
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: wishlist.length,
+                  itemBuilder: (context, index) {
+                    Coffee coffee = wishlist[index].coffee;
+                    // print(wishlist[index].size);
+                    return Dismissible(
+                      key: Key(wishlist[index].coffee.toString()),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: [],
+                        ),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                      onDismissed: (direction) {
+                        setState(() {
+                          wishlist.removeAt(index);
+                        });
+                      },
 
-            if (wishlist.isNotEmpty) finish(checkout),
-          ],
+                      child: CartItemCard(
+                        item: wishlist[index],
+                        coffee: coffee,
+                        rebuildWidget: rebuildWidget,
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              if (wishlist.isNotEmpty) finish(checkout),
+            ],
+          ),
         ),
       ),
     );

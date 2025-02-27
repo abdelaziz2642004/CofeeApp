@@ -10,7 +10,7 @@ Widget priceAndSize(Coffee coffee, WishlistItem item) {
         style: TextStyle(
           fontSize: 16,
           fontFamily: 'DopisBold',
-          color: Color(0xffb2b2b2),
+          color: Color.fromARGB(255, 144, 144, 144),
         ),
       ),
       SizedBox(height: 4),
@@ -24,7 +24,7 @@ Widget priceAndSize(Coffee coffee, WishlistItem item) {
         style: TextStyle(
           fontSize: 16,
           fontFamily: 'DopisBold',
-          color: Color(0xffb2b2b2),
+          color: Color.fromARGB(255, 144, 144, 144),
         ),
       ),
     ],

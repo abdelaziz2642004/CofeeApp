@@ -1,3 +1,4 @@
+import 'package:prj/Models/Notification.dart';
 import 'package:prj/Models/User.dart';
 import 'package:prj/Models/WishList.dart';
 import 'package:prj/Models/WishlistItem.dart';
@@ -54,11 +55,13 @@ final List<Coffee> coffees = [
 ];
 
 user currentUser = user(
-  name: 'John Doe',
+  fullName: 'John Doe',
   email: 'abdelaziz@sth.com',
   id: "2022",
-  phoneNumber: "0101010101001",
   wishlist: Wishlist(),
+  ImageUrl:
+      "https://media.licdn.com/dms/image/v2/D5603AQEfH1I9VBJ12w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1695482864627?e=1746057600&v=beta&t=1FIRPxT06i0wXO6NsrGN42_aZ7DNIgCxmScZVusn_wE",
+  UserName: "zezo123",
 );
 
 WishlistItem item = WishlistItem(
@@ -100,4 +103,38 @@ void start() {
   currentUser.wishlist.addItem(item);
   currentUser.wishlist.addItem(item2);
   currentUser.wishlist.addItem(item3);
+
+  currentUser.favorited.add(coffees[0].id);
+  currentUser.favorited.add(coffees[2].id);
+
+  currentUser.notifications.add(
+    notification(
+      message: "Check out this offer !! 70% off on mondays",
+      coffee: coffees[1],
+    ),
+  );
+  currentUser.notifications.add(
+    notification(
+      message: "Check out this offer !! 70% off on mondays",
+      coffee: coffees[1],
+    ),
+  );
+  currentUser.notifications.add(
+    notification(
+      message: "Check out this offer !! 70% off on mondays",
+      coffee: coffees[1],
+    ),
+  );
+  currentUser.notifications.add(
+    notification(
+      message: "Check out this offer !! 70% off on mondays",
+      coffee: coffees[1],
+    ),
+  );
+  currentUser.notifications.add(
+    notification(
+      message: "Check out this offer !! 70% off on mondays",
+      coffee: coffees[1],
+    ),
+  );
 }

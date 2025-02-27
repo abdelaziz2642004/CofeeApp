@@ -47,15 +47,8 @@ class _CartItemCardState extends State<CartItemCard> {
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 236, 236, 236),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            blurRadius: 8,
-            spreadRadius: 2,
-          ),
-        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +63,6 @@ class _CartItemCardState extends State<CartItemCard> {
             ),
           ),
           SizedBox(width: 12),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +86,6 @@ class _CartItemCardState extends State<CartItemCard> {
               ],
             ),
           ),
-
-          // Controls (Wrapped in a Column & pushed to the bottom)
         ],
       ),
     );

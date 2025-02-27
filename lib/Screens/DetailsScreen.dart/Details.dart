@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/CustomAppBar.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/addToCart.dart';
@@ -32,9 +33,19 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
   int maxlines = 2;
   int selectedQuantity = 1;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isFavorite = currentUser.favorited.contains(widget.coffee.id);
+  }
+
   void toggleFavorite() {
     setState(() {
       isFavorite = !isFavorite;
+      if (isFavorite) {
+        currentUser.favorited.add(widget.coffee.id);
+      }
     });
   }
 

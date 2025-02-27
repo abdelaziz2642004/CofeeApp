@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prj/Screens/FavoriteScreen/FavortieScreen.dart';
 import 'package:prj/Screens/HomeScreen/HomeScreen.dart';
-import 'package:prj/Screens/LoginScreen/LoginScreen.dart';
+import 'package:prj/Screens/NotificationScreen/notificationScreen.dart';
 import 'package:prj/Screens/Tabs%20(%20Screen%20Chooser%20)/BottomNavBar.dart';
 import 'package:prj/Screens/WishListScreen/WishlistScreen.dart';
 
@@ -24,9 +25,14 @@ class _TabsState extends State<TabsScreen> {
     switch (index) {
       case 0:
         return Homescreen();
+      case 1:
+        return FavoritesScreen();
 
       case 2:
         return wishlistscreen();
+
+      case 3:
+        return NotificationsScreen();
       default:
         return Homescreen();
     }
