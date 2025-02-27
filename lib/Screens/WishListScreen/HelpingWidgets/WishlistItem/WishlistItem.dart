@@ -6,6 +6,7 @@ import 'package:prj/Models/WishlistItem.dart';
 import 'package:prj/Screens/WishListScreen/HelpingWidgets/WishlistItem/PriceAndSize.dart';
 import 'package:prj/Screens/WishListScreen/HelpingWidgets/WishlistItem/QuantityPart.dart';
 
+// did
 class CartItemCard extends StatelessWidget {
   const CartItemCard({required this.item, super.key, required this.rebuild});
   final WishlistItem item;
