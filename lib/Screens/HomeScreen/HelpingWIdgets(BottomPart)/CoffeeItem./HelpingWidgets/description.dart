@@ -62,7 +62,7 @@ Widget descriptionWidget(Coffee coffee) {
                 int index = -1;
                 for (int i = 0; i < currentUser.wishlist.items.length; i++) {
                   WishlistItem item = currentUser.wishlist.items[i];
-                  if (item.coffee.id == coffee.id && item.size == 'L') {
+                  if (item.coffee.id == coffee.id && item.size == 'S') {
                     index = i;
                     break;
                   }
@@ -73,14 +73,14 @@ Widget descriptionWidget(Coffee coffee) {
                       .wishlist
                       .items[index]
                       .coffee
-                      .getPrice('L');
+                      .getPrice('S');
                   return;
                 }
                 WishlistItem item = WishlistItem(
                   coffee: coffee,
                   addedAt: DateTime.now(),
                   quantity: 1,
-                  size: 'L',
+                  size: 'S',
                 );
                 currentUser.wishlist.addItem(item);
                 return;
