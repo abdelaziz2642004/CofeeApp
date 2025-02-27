@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prj/Screens/HomeScreen/HomeScreen.dart';
+import 'package:prj/Screens/LoginScreen/LoginScreen.dart';
 import 'package:prj/Screens/Tabs%20(%20Screen%20Chooser%20)/BottomNavBar.dart';
 import 'package:prj/Screens/WishListScreen/WishlistScreen.dart';
 
@@ -25,7 +26,7 @@ class _TabsState extends State<TabsScreen> {
         return Homescreen();
 
       case 2:
-        return CartScreen();
+        return wishlistscreen();
       default:
         return Homescreen();
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prj/Models/Coffee.dart';
-import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/CoffeeItem.dart';
+import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/CoffeeItem./CoffeeItem.dart';
 
 class Gridview extends StatelessWidget {
   const Gridview({super.key, required this.selectedCoffees});

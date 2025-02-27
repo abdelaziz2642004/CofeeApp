@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Coffeecard extends StatelessWidget {
-  const Coffeecard({super.key});
+class Offercard extends StatelessWidget {
+  const Offercard({super.key});
 
   @override
   Widget build(BuildContext context) {

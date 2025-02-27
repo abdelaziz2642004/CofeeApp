@@ -2,14 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Models/WishlistItem.dart';
-import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/addToCart.dart';
-import 'package:prj/Screens/WishListScreen/HelpingWidgets/Item.dart';
+import 'package:prj/Screens/WishListScreen/HelpingWidgets/Item/Item.dart';
+import 'package:prj/Screens/WishListScreen/HelpingWidgets/finish/finish.dart';
 
-class CartScreen extends StatelessWidget {
-  final List<WishlistItem> wishlist = currentUser.wishlist.items;
+class wishlistscreen extends StatefulWidget {
+  @override
+  State<wishlistscreen> createState() => _wishlistscreenState();
+}
+
+class _wishlistscreenState extends State<wishlistscreen> {
+  List<WishlistItem> wishlist = [];
+  void rebuildWidget() {
+    setState(() {});
+  }
+
+  void checkout() {
+    setState(() {
+      currentUser.wishlist.Finish();
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    wishlist = currentUser.wishlist.items;
+  }
 
   @override
   Widget build(BuildContext context) {
+    wishlist = currentUser.wishlist.items;
+
+    // print(wishlist);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -40,7 +65,11 @@ class CartScreen extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      currentUser.wishlist.Finish();
+                    });
+                  },
                   icon: Icon(Icons.delete_outline),
                   color: Color(0xffc47c51),
                 ),
@@ -53,7 +82,7 @@ class CartScreen extends StatelessWidget {
                 itemCount: wishlist.length,
                 itemBuilder: (context, index) {
                   Coffee coffee = wishlist[index].coffee;
-
+                  print(wishlist[index].size);
                   return Dismissible(
                     key: Key(wishlist[index].coffee.toString()),
                     direction: DismissDirection.endToStart,
@@ -67,90 +96,22 @@ class CartScreen extends StatelessWidget {
                       child: Icon(Icons.delete, color: Colors.white, size: 30),
                     ),
                     onDismissed: (direction) {
-                      wishlist.removeAt(index);
+                      setState(() {
+                        wishlist.removeAt(index);
+                      });
                     },
 
-                    child: CartItemCard(item: wishlist[index], coffee: coffee),
+                    child: CartItemCard(
+                      item: wishlist[index],
+                      coffee: coffee,
+                      rebuildWidget: rebuildWidget,
+                    ),
                   );
                 },
               ),
             ),
 
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              child: Container(
-                height: 120,
-                width: double.infinity,
-                color: const Color.fromARGB(255, 255, 255, 255),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment:
-                          CrossAxisAlignment
-                              .center, // Ensures vertical alignment
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment:
-                              MainAxisAlignment.center, // Align text vertically
-                          children: [
-                            Text(
-                              "Price",
-                              style: TextStyle(
-                                color: Color(0xff999999),
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'DopisBold',
-                                fontSize: 15,
-                              ),
-                            ),
-                            Text(
-                              "\$ ${currentUser.wishlist.total}",
-                              style: const TextStyle(
-                                color: Color(0xffc47c51),
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'DopisBold',
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Align(
-                          alignment: Alignment.center,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 73,
-                                vertical: 17,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              backgroundColor: Color(0xffc47c51),
-                            ),
-                            child: const Text(
-                              "Add to Cart",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'DopisBold',
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            if (wishlist.isNotEmpty) finish(checkout),
           ],
         ),
       ),

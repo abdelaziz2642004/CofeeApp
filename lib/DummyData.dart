@@ -15,7 +15,9 @@ final List<Coffee> coffees = [
   Coffee(
     name: 'Caffe Mocha with extra milk and alot of thingfs',
     description: 'Strong and rich coffee shot.',
-    price: 4.53,
+    smallPrice: 4.53,
+    mediumPrice: 8.45,
+    largePrice: 15.00,
     imageUrl:
         "https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     categoryIDs: [categories[1].id],
@@ -25,7 +27,9 @@ final List<Coffee> coffees = [
     name: 'Latte',
     description:
         'Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk.Smooth coffee with steamed milk. HELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOOHELLLPOOPOO',
-    price: 3.99,
+    smallPrice: 6.00,
+    mediumPrice: 7.77,
+    largePrice: 12.86,
     imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSNw7oOeCCCIv_D1ok78I61XqgUl1ZU_S2DA&s",
     categoryIDs: [categories[2].id],
@@ -34,7 +38,9 @@ final List<Coffee> coffees = [
   Coffee(
     name: 'Cappuccino',
     description: 'Creamy coffee with foam.',
-    price: 4.49,
+    smallPrice: 4.49,
+    mediumPrice: 8.09,
+    largePrice: 10.89,
     imageUrl:
         "https://sumatocoffee.com/cdn/shop/articles/espresso.png?v=1718370919&width=640",
     categoryIDs: [
@@ -85,8 +91,8 @@ Map<String, String> categoryMap = {
 void start() {
   // print(item.coffeeId);
   // print(item2.coffeeId);
-  print(item3.coffee);
-  print(coffees[0].id);
+  // print(item3.coffee);
+  // print(coffees[0].id);
   // print(coffees[1].id);
   // print(coffees[2].id);
 

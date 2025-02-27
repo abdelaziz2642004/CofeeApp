@@ -2,10 +2,13 @@ import 'package:uuid/uuid.dart';
 
 class Coffee {
   final String _id;
-  String _name;
-  String _description;
+  final String _name;
+  final String _description;
   double _rating;
-  double _price;
+  final double _smallPrice;
+  final double _mediumPrice;
+  final double _largePrice;
+
   String _imageUrl;
   List<String> _categoryIDs;
   int _ratingCount = 89;
@@ -19,13 +22,19 @@ class Coffee {
   Coffee({
     required String name,
     required String description,
-    required double price,
+    required double smallPrice,
+    required double mediumPrice,
+    required double largePrice,
+
     required String imageUrl,
     required List<String> categoryIDs,
     required double rating,
   }) : _name = name,
        _description = description,
-       _price = price,
+       _smallPrice = smallPrice,
+       _mediumPrice = mediumPrice,
+       _largePrice = largePrice,
+
        _imageUrl = imageUrl,
        _categoryIDs = categoryIDs,
        _rating = rating,
@@ -34,14 +43,20 @@ class Coffee {
   String get id => _id;
 
   String get name => _name;
-  set name(String value) => _name = value;
 
   String get description => _description;
-  set description(String value) => _description = value;
 
   double get rating => _rating;
 
-  double get price => _price;
+  double getPrice(String size) {
+    // print(size);
+    // print("$_smallPrice, $_mediumPrice, $_largePrice");
+    return size == 'L'
+        ? _largePrice
+        : size == 'M'
+        ? _mediumPrice
+        : _smallPrice;
+  }
 
   String get imageUrl => _imageUrl;
 

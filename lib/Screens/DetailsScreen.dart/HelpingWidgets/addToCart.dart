@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
+import 'package:prj/Models/WishlistItem.dart';
 
 class Addtocart extends StatelessWidget {
-  const Addtocart({super.key, required this.coffee, required this.size});
+  const Addtocart({
+    super.key,
+    required this.coffee,
+    required this.size,
+    required this.quantity,
+  });
   final Coffee coffee;
   final String size;
+  final int quantity;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -40,11 +48,7 @@ class Addtocart extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      size == 'L'
-                          ? "\$ ${coffee.price * 2}"
-                          : size == 'M'
-                          ? "\$ ${coffee.price * 1.5}"
-                          : "\$ ${coffee.price}",
+                      '\$${coffee.getPrice(size)}',
                       style: const TextStyle(
                         color: Color(0xffc47c51),
                         fontWeight: FontWeight.normal,
@@ -58,7 +62,40 @@ class Addtocart extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      int index = -1;
+                      for (
+                        int i = 0;
+                        i < currentUser.wishlist.items.length;
+                        i++
+                      ) {
+                        WishlistItem item = currentUser.wishlist.items[i];
+                        if (item.coffee.id == coffee.id && item.size == size) {
+                          index = i;
+                          break;
+                        }
+                      }
+                      if (index != -1) {
+                        currentUser.wishlist.items[index].quantity += quantity;
+                        currentUser.wishlist.total +=
+                            currentUser.wishlist.items[index].coffee.getPrice(
+                              size,
+                            ) *
+                            quantity;
+                        Navigator.pop(context);
+                        return;
+                      }
+
+                      WishlistItem item = WishlistItem(
+                        coffee: coffee,
+                        addedAt: DateTime.now(),
+                        quantity: quantity,
+                        size: size,
+                      );
+                      currentUser.wishlist.addItem(item);
+                      Navigator.pop(context);
+                      return;
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 73,

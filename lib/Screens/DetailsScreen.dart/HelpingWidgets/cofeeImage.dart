@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeImage extends StatelessWidget {
@@ -12,8 +13,8 @@ class CoffeeImage extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16.0),
-        child: Image.network(
-          imageUrl,
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
           width: double.infinity,
           fit: BoxFit.cover,
         ),

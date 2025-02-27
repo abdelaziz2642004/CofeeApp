@@ -5,6 +5,7 @@ import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/addToCart.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/cofeeImage.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/coffeeDescription.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/coffeeInfo.dart';
+import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/coffeeQuantitySelector.dart';
 import 'package:prj/Screens/DetailsScreen.dart/HelpingWidgets/coffeeSizeSelector.dart';
 
 class CoffeeDetailsScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
   bool isExpanded = false;
   bool isOverflowing = false;
   int maxlines = 2;
+  int selectedQuantity = 1;
 
   void toggleFavorite() {
     setState(() {
@@ -69,6 +71,16 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
     // print(selectedSize);
   }
 
+  void changeQuantity(int x) {
+    // print(quantity);
+    // print(x);
+    setState(() {
+      selectedQuantity += x;
+      if (selectedQuantity < 1) selectedQuantity = 1;
+    });
+    // print(quantity);
+  }
+
   @override
   Widget build(BuildContext context) {
     checkOverflow();
@@ -104,16 +116,23 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
 
                     // ANOTHER OPTION FOR Quantity
                     const SizedBox(height: 14),
+                    // babasy el selected size to color the selected one differently
                     ...SizeSelector(
                       selectedSize: selectedSize,
                       chooseSize: chooseSize,
                     ),
+                    const SizedBox(height: 14),
+
+                    ...quantitySelector(selectedQuantity, changeQuantity),
                   ],
                 ),
               ),
             ),
-
-            Addtocart(coffee: widget.coffee, size: selectedSize),
+            Addtocart(
+              coffee: widget.coffee,
+              size: selectedSize,
+              quantity: selectedQuantity,
+            ),
           ],
         ),
       ),

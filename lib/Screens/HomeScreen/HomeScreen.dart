@@ -59,7 +59,7 @@ class _MyHomePageState extends State<Homescreen> {
 
               const SizedBox(height: 30),
 
-              const Coffeecard(),
+              const Offercard(),
 
               const SizedBox(height: 20),
 
