@@ -24,7 +24,7 @@ class ProfileOptions extends StatelessWidget {
           onTap:
               () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => wishlistscreen()),
+                MaterialPageRoute(builder: (context) => WishlistScreen()),
               ),
         ),
         ListTile(

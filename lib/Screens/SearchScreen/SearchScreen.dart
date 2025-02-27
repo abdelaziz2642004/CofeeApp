@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Screens/DetailsScreen.dart/Details.dart';
+import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/filterMenu.dart';
 import 'package:prj/Screens/SearchScreen/HelpingWidgets/SearchLogic.dart';
 import 'package:prj/Screens/SearchScreen/HelpingWidgets/searchItem.dart';
 
@@ -34,20 +35,43 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search Coffee')),
+      appBar: AppBar(
+        title: const Text(
+          'Search Coffee',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'DopisBold',
+          ),
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
-              ),
-              onChanged: _filterSearch,
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+
+                      labelText: 'Search',
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                    onChanged: _filterSearch,
+                  ),
+                ),
+                SizedBox(width: 10),
+                FilterMenu(),
+              ],
             ),
+
             SizedBox(height: 16),
             Expanded(
               child: ListView.builder(

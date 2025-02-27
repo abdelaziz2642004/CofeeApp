@@ -29,7 +29,7 @@ class _TabsState extends State<TabsScreen> {
         return FavoritesScreen();
 
       case 2:
-        return wishlistscreen();
+        return WishlistScreen();
 
       case 3:
         return NotificationsScreen();

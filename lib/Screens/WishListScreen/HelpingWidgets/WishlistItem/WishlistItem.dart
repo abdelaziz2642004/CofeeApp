@@ -3,46 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Models/WishlistItem.dart';
-import 'package:prj/Screens/WishListScreen/HelpingWidgets/Item/PriceAndSize.dart';
-import 'package:prj/Screens/WishListScreen/HelpingWidgets/Item/QuantityPart.dart';
+import 'package:prj/Screens/WishListScreen/HelpingWidgets/WishlistItem/PriceAndSize.dart';
+import 'package:prj/Screens/WishListScreen/HelpingWidgets/WishlistItem/QuantityPart.dart';
 
-class CartItemCard extends StatefulWidget {
-  const CartItemCard({
-    required this.item,
-    super.key,
-    required this.coffee,
-    required this.rebuildWidget,
-  });
+class CartItemCard extends StatelessWidget {
+  const CartItemCard({required this.item, super.key, required this.rebuild});
   final WishlistItem item;
-  final Coffee coffee;
-  final void Function() rebuildWidget;
-  @override
-  State<CartItemCard> createState() => _CartItemCardState();
-}
+  final void Function() rebuild;
 
-class _CartItemCardState extends State<CartItemCard> {
   void changeQuantity(int x) {
-    widget.item.quantity += x;
+    item.quantity += x;
     if (item.quantity <= 0) {
       removeItem();
+      return;
     } else {
-      setState(() {});
-      currentUser.wishlist.total += x * widget.item.coffee.getPrice(item.size);
-      // widget.rebuildWidget;
+      currentUser.wishlist.total += x * item.coffee.getPrice(item.size);
     }
+    rebuild();
   }
 
   void removeItem() {
-    setState(() {
-      currentUser.wishlist.items.remove(widget.item);
-      currentUser.wishlist.total -=
-          item.quantity * widget.item.coffee.getPrice(item.size);
-      // widget.rebuildWidget;
-    });
+    // currentUser.wishlist.total -=
+    //     item.quantity * item.coffee.getPrice(item.size); // OMG IM SO DUMB WHY DO I MULTIPLY BY 0
+    currentUser.wishlist.total -= item.coffee.getPrice(item.size);
+    currentUser.wishlist.items.remove(item);
+
+    rebuild();
   }
 
   @override
   Widget build(BuildContext context) {
+    final Coffee coffee = item.coffee;
     return Container(
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.all(20),
@@ -56,7 +47,7 @@ class _CartItemCardState extends State<CartItemCard> {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: CachedNetworkImage(
-              imageUrl: widget.coffee.imageUrl,
+              imageUrl: coffee.imageUrl,
               height: 100,
               width: 100,
               fit: BoxFit.cover,
@@ -70,16 +61,16 @@ class _CartItemCardState extends State<CartItemCard> {
                 Text(
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  widget.coffee.name,
+                  coffee.name,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     fontFamily: 'DopisBold',
                   ),
                 ),
-                priceAndSize(widget.coffee, widget.item),
+                priceAndSize(coffee, item),
                 quantityPart(
-                  item: widget.item,
+                  item: item,
                   changeQuantity: changeQuantity,
                   removeItem: removeItem,
                 ),

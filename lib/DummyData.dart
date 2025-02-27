@@ -106,35 +106,38 @@ void start() {
 
   currentUser.favorited.add(coffees[0].id);
   currentUser.favorited.add(coffees[2].id);
+  currentUser.notifications.add(
+    notification(message: "Your Password Has been changed successfully"),
+  );
 
   currentUser.notifications.add(
     notification(
       message: "Check out this offer !! 70% off on mondays",
-      coffee: coffees[1],
+      c: coffees[1],
     ),
   );
   currentUser.notifications.add(
     notification(
       message: "Check out this offer !! 70% off on mondays",
-      coffee: coffees[1],
+      c: coffees[1],
     ),
   );
   currentUser.notifications.add(
     notification(
       message: "Check out this offer !! 70% off on mondays",
-      coffee: coffees[1],
+      c: coffees[2],
     ),
   );
   currentUser.notifications.add(
     notification(
       message: "Check out this offer !! 70% off on mondays",
-      coffee: coffees[1],
+      c: coffees[0],
     ),
   );
   currentUser.notifications.add(
     notification(
       message: "Check out this offer !! 70% off on mondays",
-      coffee: coffees[1],
+      c: coffees[1],
     ),
   );
 }
