@@ -83,6 +83,7 @@ flutter:
     - assets/images/3.jpeg
     - assets/images/4.jpeg
     - assets/images/Profile.png
+    - assets/images/profile.jpg 
     
     - assets/icons/tune.svg
     - assets/icons/heart.svg

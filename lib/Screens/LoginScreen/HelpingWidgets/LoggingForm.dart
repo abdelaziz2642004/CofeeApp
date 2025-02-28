@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prj/Screens/HomeScreen/HomeScreen.dart';
 import 'package:prj/Screens/LoginScreen/HelpingWidgets/EmailField.dart';
 import 'package:prj/Screens/LoginScreen/HelpingWidgets/passwordField.dart';
 import 'package:prj/Screens/LoginScreen/HelpingWidgets/signInButton.dart';
+import 'package:prj/Screens/LoginScreen/LoginService/LoginService.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -14,75 +13,34 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  String _emailOrUsername = '';
-  String _password = '';
-  bool _obscurePassword = true;
-  bool _isLoading = false;
+  late final LoginService loginService;
 
-  void signIn() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-      //log in :D
-
-      String input = _emailOrUsername!.trim();
-      try {
-        if (!input.contains('@')) {
-          final snapshot =
-              await FirebaseFirestore.instance
-                  .collection('UserNames')
-                  .doc(input)
-                  .get();
-
-          if (snapshot.exists) {
-            input = snapshot.data()!['email'];
-          }
-        }
-
-        final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: input,
-          password: _password!.trim(),
-        );
-      } catch (e) {
-        // print(e);
-        _showErrorDialog(e.toString());
-      }
-    }
-  }
-
-  void _showErrorDialog(String message) {
-    if (!mounted) return; // Check if the widget is still mounted
-    showDialog(
-      context: context,
-      builder:
-          (ctx) => AlertDialog(
-            title: const Text('Login Failed'),
-            content: Text(message),
-            actions: [
-              TextButton(
-                child: const Text('Okay'),
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-              ),
-            ],
-          ),
-    );
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginService = LoginService(context: context, rebuild: setState);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: loginService.formKey,
       child: Column(
         children: [
-          EmailorUsernameField(onChanged: (value) => _emailOrUsername = value),
+          EmailorUsernameField(
+            onChanged: (value) => loginService.emailOrUsername = value,
+          ),
           const SizedBox(height: 20),
           PasswordField(
-            obscurePassword: _obscurePassword,
-            onChanged: (value) => _password = value,
+            obscurePassword: loginService.obscurePassword,
+            onChanged: (value) => loginService.password = value,
             toggleVisibility:
-                () => setState(() => _obscurePassword = !_obscurePassword),
+                () => setState(
+                  () =>
+                      loginService.obscurePassword =
+                          !loginService.obscurePassword,
+                ),
             labelText: "Password",
           ),
           Row(
@@ -103,7 +61,11 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ],
           ),
-          SignButton(isLoading: _isLoading, onPressed: signIn, type: "In"),
+          SignButton(
+            isLoading: loginService.isLoading,
+            onPressed: loginService.signIn,
+            type: "In",
+          ),
         ],
       ),
     );

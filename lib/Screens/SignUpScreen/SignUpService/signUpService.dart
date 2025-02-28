@@ -24,7 +24,7 @@ class Signupservice {
   bool _isLoading = false;
 
   final void Function(void Function()) rebuild; // rebuild the parent widget :D
-  final BuildContext context; // rebuild the parent widget :D
+  final BuildContext context; // show a successful dialog
 
   Signupservice({required this.rebuild, required this.context});
 

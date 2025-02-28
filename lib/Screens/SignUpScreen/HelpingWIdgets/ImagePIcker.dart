@@ -73,7 +73,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
           foregroundImage:
               _pickedImageFile != null
                   ? FileImage(_pickedImageFile!)
-                  : const AssetImage('assets/Profile.jpg') as ImageProvider,
+                  : const AssetImage('assets/images/profile.jpg')
+                      as ImageProvider,
         ),
         TextButton.icon(
           onPressed: _pickImage,
