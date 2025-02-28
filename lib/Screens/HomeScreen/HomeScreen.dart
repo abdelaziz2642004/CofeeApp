@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Models/category.dart';
@@ -13,14 +14,14 @@ import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/profileAvata
 
 // This is the screen of home, not the tabs.dart
 // Here we will put the chosen category variable, not the chosen screen
-class Homescreen extends StatefulWidget {
+class Homescreen extends ConsumerStatefulWidget {
   const Homescreen({super.key});
 
   @override
-  State<Homescreen> createState() => _MyHomePageState();
+  ConsumerState<Homescreen> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<Homescreen> {
+class _MyHomePageState extends ConsumerState<Homescreen> {
   category cat = categories[0];
   List<Coffee> selectedCoffees = coffees;
 

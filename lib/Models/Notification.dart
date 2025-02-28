@@ -1,6 +1,8 @@
 import 'package:prj/Models/Coffee.dart';
+import 'package:uuid/uuid.dart';
 
 class notification {
+  final String _id;
   final String message;
   Coffee coffee = Coffee(
     name: "null",
@@ -12,7 +14,11 @@ class notification {
     categoryIDs: [],
     rating: 0,
   );
-  notification({required this.message, Coffee? c}) {
-    if (c != null) coffee = c;
+
+  notification({required this.message, Coffee? c, String? id})
+    : _id = id ?? Uuid().v4() {
+    if (c != null) {
+      coffee = c;
+    }
   }
 }

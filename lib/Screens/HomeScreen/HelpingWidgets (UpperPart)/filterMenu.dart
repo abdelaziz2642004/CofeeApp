@@ -43,7 +43,14 @@ class _FilterMenuState extends State<FilterMenu> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: const Text('Filter Options'),
+              title: const Text(
+                'Filter Options',
+                style: TextStyle(
+                  color: Color(0xffc47c51),
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'DopisBold',
+                ),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -61,7 +68,14 @@ class _FilterMenuState extends State<FilterMenu> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Close'),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(
+                      color: Color(0xffc47c51),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'DopisBold',
+                    ),
+                  ),
                 ),
               ],
             );
@@ -77,8 +91,13 @@ class _FilterMenuState extends State<FilterMenu> {
     void Function(void Function()) setState,
   ) {
     return SwitchListTile(
-      title: Text(label),
+      title: Text(
+        label,
+        style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'DopisBold'),
+      ),
       value: value,
+      activeColor: Color.fromARGB(255, 175, 75, 17),
+
       onChanged: (newValue) {
         setState(() {
           onChanged(label, newValue);

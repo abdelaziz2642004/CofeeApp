@@ -67,13 +67,6 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
     });
   }
 
-  void onToggleExpand() {
-    setState(() {
-      isExpanded = !isExpanded;
-      maxlines = isExpanded ? 100 : 2;
-    });
-  }
-
   void chooseSize(String newSize) {
     // print("Size Selected");
     setState(() {
@@ -119,9 +112,7 @@ class _CoffeeDetailsScreenState extends State<CoffeeDetailsScreen> {
                     const SizedBox(height: 14),
                     ...CoffeeDescription(
                       description: widget.coffee.description,
-                      isExpanded: isExpanded,
                       maxlines: maxlines,
-                      onToggleExpand: onToggleExpand,
                       isOverflowing: isOverflowing,
                     ),
 

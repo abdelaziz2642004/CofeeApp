@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 
 List<Widget> CoffeeDescription({
   required String description,
-  required bool isExpanded,
   required int maxlines,
   required bool isOverflowing,
-  required void Function() onToggleExpand,
 }) {
   return [
     Text(
@@ -22,33 +21,32 @@ List<Widget> CoffeeDescription({
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          description,
-          maxLines: maxlines,
-          overflow: TextOverflow.ellipsis,
+        ReadMoreText(
           style: TextStyle(
+            color: Color.fromARGB(255, 147, 147, 147),
             fontWeight: FontWeight.bold,
             fontFamily: 'DopisBold',
-            fontSize: 14.5,
-            color:
-                isOverflowing
-                    ? Color(0xffb2b2b2)
-                    : const Color.fromARGB(162, 17, 16, 16),
+          ),
+
+          description,
+          trimLength: 120,
+          colorClickableText: Colors.blue,
+          trimMode: TrimMode.Length,
+          trimCollapsedText: 'Read more',
+          trimExpandedText: '  Read less',
+          moreStyle: TextStyle(
+            color: Color(0xffc47c51),
+            fontWeight: FontWeight.bold,
+            fontFamily: 'DopisBold',
+            fontSize: 15,
+          ),
+          lessStyle: TextStyle(
+            color: Color(0xffc47c51),
+            fontWeight: FontWeight.bold,
+            fontFamily: 'DopisBold',
+            fontSize: 15,
           ),
         ),
-        if (isOverflowing || maxlines == 100)
-          GestureDetector(
-            onTap: onToggleExpand,
-            child: Text(
-              isExpanded ? "Read Less" : "...Read More",
-              style: TextStyle(
-                color: Color(0xffc47c51),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'DopisBold',
-                fontSize: 15,
-              ),
-            ),
-          ),
       ],
     ),
   ];

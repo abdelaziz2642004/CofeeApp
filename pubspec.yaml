@@ -38,17 +38,21 @@ dependencies:
   uuid: ^4.2.1  # Use the latest version
   flutter_riverpod: ^2.5.1
   shared_preferences: ^2.3.2
-  # cloud_firestore: ^5.4.4
+  cloud_firestore: ^5.4.4
   transparent_image: ^2.0.1
   cached_network_image: ^3.4.1
-  # firebase_auth: ^5.3.1
+  firebase_auth: ^5.3.1
   lottie: ^3.1.2
   google_fonts: ^6.2.1
   font_awesome_flutter: ^10.7.0
-  # firebase_storage: ^12.3.2
+  firebase_storage: ^12.3.2
   url_launcher: ^6.3.0
   image_picker: ^1.1.2
   flutter_launcher_icons: ^0.14.1
+  readmore: ^2.2.0  # Check for the latest version
+  http: ^1.0.0  # or latest version
+  mime: ^1.0.4   # Helps detect file type
+  http_parser: ^4.0.2  # Helps define content types
 
 dev_dependencies:
   flutter_test:
