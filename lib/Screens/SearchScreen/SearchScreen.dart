@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
+import 'package:prj/Providers/drinksProvider.dart';
 import 'package:prj/Screens/DetailsScreen.dart/Details.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWidgets%20(UpperPart)/filterMenu.dart';
 import 'package:prj/Screens/SearchScreen/HelpingWidgets/SearchLogic.dart';
 import 'package:prj/Screens/SearchScreen/HelpingWidgets/searchItem.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends ConsumerStatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchScreenState extends ConsumerState<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<Coffee> filteredList = List.from(coffees);
+  List<Coffee> filteredList = [];
   String searchQuery = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    filteredList = ref.read(drinksProvider).value!;
+  }
 
   void _filterSearch(String query) {
     setState(() {
       searchQuery = query;
-      filteredList = filterCoffeeList(query);
+      filteredList = filterCoffeeList(query, ref.read(drinksProvider).value!);
     });
   }
 

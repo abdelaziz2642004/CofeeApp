@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/DummyData.dart';
+import 'package:prj/Providers/drinksProvider.dart';
 import 'package:prj/Screens/FavoriteScreen/HelpingWidgets/favoriteItem.dart';
 
-class FavoritesScreen extends StatefulWidget {
+class FavoritesScreen extends ConsumerStatefulWidget {
   const FavoritesScreen({super.key});
 
   @override
-  State<FavoritesScreen> createState() => _FavoritesScreenState();
+  ConsumerState<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
-class _FavoritesScreenState extends State<FavoritesScreen> {
+class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
   String emptyMessage = "Start Favoriting Some meals !";
 
   void toggleFavorite(String coffeeId) {
@@ -25,14 +27,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Coffee> favoriteCoffees =
-        coffees
-            .where((coffee) => currentUser.favorited.contains(coffee.id))
-            .toList();
+    final drinksAsync = ref.watch(drinksProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: AppBar(
         title: const Text(
           'Favorites',
@@ -45,8 +43,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body:
-          favoriteCoffees.isEmpty
+      body: drinksAsync.when(
+        data: (drinks) {
+          final favoriteCoffees =
+              drinks
+                  .where((coffee) => currentUser.favorited.contains(coffee.id))
+                  .toList();
+
+          return favoriteCoffees.isEmpty
               ? Center(
                 child: Text(
                   emptyMessage,
@@ -66,7 +70,17 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     onToggleFavorite: toggleFavorite,
                   );
                 },
+              );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error:
+            (error, stack) => Center(
+              child: Text(
+                "Error: $error",
+                style: const TextStyle(color: Colors.red),
               ),
+            ),
+      ),
     );
   }
 }

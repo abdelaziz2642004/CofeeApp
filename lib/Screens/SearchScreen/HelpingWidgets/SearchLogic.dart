@@ -61,7 +61,7 @@ Widget highlightText(
   );
 }
 
-List<Coffee> filterCoffeeList(String query) {
+List<Coffee> filterCoffeeList(String query, List<Coffee> coffees) {
   if (query.isEmpty) {
     return List.from(coffees);
   }

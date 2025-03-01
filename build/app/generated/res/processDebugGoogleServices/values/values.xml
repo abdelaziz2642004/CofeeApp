@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">574312468125</string>
+    <string name="google_api_key" translatable="false">AIzaSyDt-OYwiUIFa75DAqKOLcGP9YgYDNVQU_8</string>
+    <string name="google_app_id" translatable="false">1:574312468125:android:3f5abd9399102c6dfd8e74</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDt-OYwiUIFa75DAqKOLcGP9YgYDNVQU_8</string>
+    <string name="google_storage_bucket" translatable="false">coffeeapp-36446.firebasestorage.app</string>
+    <string name="project_id" translatable="false">coffeeapp-36446</string>
+</resources>

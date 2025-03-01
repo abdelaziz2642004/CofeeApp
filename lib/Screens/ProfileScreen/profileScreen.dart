@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prj/Screens/ProfileScreen/HelpingWidgets/profileInfo.dart';
 import 'package:prj/Screens/ProfileScreen/HelpingWidgets/profileOptions.dart';
@@ -35,7 +36,10 @@ class ProfileScreen extends StatelessWidget {
               ProfileOptions(),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pop(context);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xffc47c51),
                   foregroundColor: Colors.white,

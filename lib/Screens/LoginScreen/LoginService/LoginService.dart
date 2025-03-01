@@ -39,10 +39,11 @@ class LoginService {
           password: password!.trim(),
         );
         isLoading = false;
-        rebuild(() {});
       } catch (e) {
         // print(e);
         _showErrorDialog(e.toString());
+        isLoading = false;
+        rebuild(() {});
       }
     }
   }

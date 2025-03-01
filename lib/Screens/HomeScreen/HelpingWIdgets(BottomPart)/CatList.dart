@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:prj/DummyData.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prj/Models/category.dart';
+import 'package:prj/Providers/categoriesProvider.dart';
 
 // we made this stateful , why ?
 // because instead of completely rebuilding the home_screen !!
 // why not just rebuild this part only ?
 
-class Catlist extends StatelessWidget {
-  const Catlist({
-    super.key,
-    required void Function(category)? rebuild,
-    required this.cat,
-  }) : _rebuild = rebuild;
-  final void Function(category)? _rebuild;
+class Catlist extends ConsumerWidget {
+  const Catlist({super.key, required this.rebuild, required this.cat});
+  final void Function(category) rebuild;
   final category cat;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    List<category> categories = ref.watch(categoriesProvider).value ?? [];
+    print(cat.name + cat.id);
     return SizedBox(
       height: 30,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length, // Number of list items
         itemBuilder: (context, index) {
-          bool isSelected = cat == categories[index];
+          bool isSelected = cat.id == categories[index].id;
+          // print(categories[index].name + categories[index].id);
+          // print(isSelected);
+          // print("------------------------------------------");
+
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: GestureDetector(
               onTap: () {
-                _rebuild!(categories[index]);
+                rebuild(categories[index]);
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 7),

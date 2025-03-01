@@ -96,6 +96,8 @@ flutter:
     - assets/icons/nuts.svg
 
     - assets/JSON/Welcome.json
+    - assets/JSON/loading.json
+
 
 
 

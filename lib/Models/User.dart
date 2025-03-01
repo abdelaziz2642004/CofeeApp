@@ -11,19 +11,20 @@ If you're using NoSQL(Firebase :D), store the wishlist as a list inside the user
 class user {
   final String id;
   final String email;
-  final String UserName;
+  // final String UserName; // not needed ?
   final String ImageUrl;
   final String fullName;
   final Wishlist wishlist;
   List<String> favorited = [];
-  List<notification> notifications = [];
+  List<myNotification> notifications = [];
 
   user({
     required this.id,
     required this.email,
     required this.wishlist,
     required this.ImageUrl,
-    required this.UserName,
     required this.fullName,
+    required this.favorited,
+    required this.notifications,
   });
 }

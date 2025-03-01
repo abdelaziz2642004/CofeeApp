@@ -115,6 +115,12 @@ class Signupservice {
   }
 
   Future<void> signUp() async {
+    //  the collections  must :D exist before querying
+    await FirebaseFirestore.instance
+        .collection('UserNames')
+        .doc('_init')
+        .set({});
+    await FirebaseFirestore.instance.collection('Users').doc('_init').set({});
     if (_formKey.currentState!.validate()) {
       _emailError = null;
       _usernameError = null;
@@ -145,11 +151,13 @@ class Signupservice {
         // print(userCredential.user!.email);
         // print("i'm here");
 
-        String imageUrl = await uploadImageToCloudinary(
-          _selectedImage!,
-          userCredential,
-        ); // in order to await a function , --> Future<type>
-        print("i'm here $imageUrl");
+        String imageUrl = '';
+        if (_selectedImage != null)
+          imageUrl = await uploadImageToCloudinary(
+            _selectedImage!,
+            userCredential,
+          ); // in order to await a function , --> Future<type>
+        // print("i'm here $imageUrl");
 
         await FirebaseFirestore.instance
             .collection('Users')

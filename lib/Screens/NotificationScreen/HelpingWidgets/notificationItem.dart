@@ -4,7 +4,7 @@ import 'package:prj/Models/Notification.dart';
 import 'package:prj/Screens/DetailsScreen.dart/Details.dart';
 
 class NotificationItem extends StatelessWidget {
-  final notification item;
+  final myNotification item;
 
   const NotificationItem({Key? key, required this.item}) : super(key: key);
 

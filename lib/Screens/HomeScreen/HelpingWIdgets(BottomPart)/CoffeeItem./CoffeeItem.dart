@@ -1,17 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prj/Models/Coffee.dart';
+import 'package:prj/Providers/categoriesProvider.dart';
 import 'package:prj/Screens/DetailsScreen.dart/Details.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/CoffeeItem./HelpingWidgets/Rating.dart';
 import 'package:prj/Screens/HomeScreen/HelpingWIdgets(BottomPart)/CoffeeItem./HelpingWidgets/description.dart';
 
-class CoffeeItem extends StatelessWidget {
+class CoffeeItem extends ConsumerWidget {
   final Coffee coffee;
 
   const CoffeeItem({super.key, required this.coffee});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -42,7 +44,14 @@ class CoffeeItem extends StatelessWidget {
 
             Positioned(top: 8, right: 8, child: ratingWidget(coffee)),
 
-            Positioned(bottom: 2, left: 2, child: descriptionWidget(coffee)),
+            Positioned(
+              bottom: 2,
+              left: 2,
+              child: descriptionWidget(
+                coffee,
+                ref.watch(categoriesProvider).value ?? [],
+              ),
+            ),
           ],
         ),
       ),

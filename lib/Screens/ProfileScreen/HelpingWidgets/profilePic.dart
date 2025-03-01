@@ -33,9 +33,9 @@ class _ProfilePictureState extends State<ProfilePicture> {
           CircleAvatar(
             radius: 50,
             backgroundImage:
-                imageUrl.startsWith('http')
-                    ? CachedNetworkImageProvider(imageUrl)
-                    : AssetImage(imageUrl) as ImageProvider,
+                currentUser.ImageUrl == ''
+                    ? AssetImage('assets/images/profile.jpg')
+                    : CachedNetworkImageProvider(imageUrl),
           ),
           Positioned(
             bottom: 0,

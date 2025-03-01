@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:prj/DummyData.dart';
 import 'package:prj/Models/Coffee.dart';
 import 'package:prj/Models/WishlistItem.dart';
+import 'package:prj/Models/category.dart';
 
-Widget descriptionWidget(Coffee coffee) {
+Widget descriptionWidget(Coffee coffee, List<category> categories) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -23,19 +24,20 @@ Widget descriptionWidget(Coffee coffee) {
           ),
         ),
       ),
-      Text(
-        categories
-            .firstWhere((category) => category.id == coffee.categoryIDs[0])
-            .name,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+      if (categories.length != 0)
+        Text(
+          categories
+              .firstWhere((category) => category.id == coffee.categoryIDs[0])
+              .name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
 
-        style: TextStyle(
-          color: Color(0xffb5b5b5),
-          fontWeight: FontWeight.bold,
-          fontSize: 14,
+          style: TextStyle(
+            color: Color(0xffb5b5b5),
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
         ),
-      ),
 
       SizedBox(height: 8),
       Row(

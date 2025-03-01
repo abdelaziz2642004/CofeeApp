@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:prj/DummyData.dart';
-import 'package:prj/Models/Coffee.dart';
-import 'package:prj/Models/category.dart';
-import 'package:prj/Providers/categoriesProvider.dart';
-import 'package:prj/Providers/drinksProvider.dart';
+import 'package:prj/Models/User.dart';
+import 'package:prj/Models/WishList.dart';
+import 'package:prj/Providers/userProvider.dart';
 import 'package:prj/Screens/LoginScreen/LoginScreen.dart';
 import 'package:prj/Screens/Tabs%20(%20Screen%20Chooser%20)/tabs.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,12 +16,6 @@ void main() async {
   await Firebase.initializeApp();
   // most important 2 lines for firebase
 
-  // start();
-
-  // await FirebaseFirestore.instance
-  //     .collection('test')
-  //     .doc("OV26juxm1CQKxe42P58v")
-  //     .update({'hello': "Value changed , DB WORKS!!!!!"});
   runApp(ProviderScope(child: const MyApp()));
 }
 
@@ -37,6 +32,9 @@ class _MyAppState extends ConsumerState<MyApp> {
   void initState() {
     super.initState();
     Screen = Loginscreen(guestMode: guestMode);
+    // ref.read(drinksProvider.notifier).fetchDrinks();
+
+    // ref.read(categoriesProvider.notifier).fetchCats();
   }
 
   void guestMode() {
@@ -47,14 +45,37 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<Coffee> allDrinks = ref.watch(drinksProvider);
-    List<category> allCats = ref.watch(categoriesProvider);
+    return MaterialApp(
+      home: Scaffold(
+        body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: Lottie.asset('assets/JSON/loading.json'));
+            }
+            if (snapshot.hasData) {
+              final userAsync = ref.watch(userProvider);
+              currentUser =
+                  userAsync.value ??
+                  user(
+                    id: "",
+                    email: "",
+                    wishlist: Wishlist(items: [], total: 0),
+                    ImageUrl: '',
+                    fullName: 'fullName',
+                    favorited: [],
+                    notifications: [],
+                  );
+              //f logged in , fetch the goddamn user !! :d
 
-    coffees = allDrinks;
-    categories = allCats;
-    for (var c in categories) {
-      categoryMap[c.id] = c.name;
-    }
-    return MaterialApp(home: Screen);
+              return TabsScreen();
+            }
+            return (snapshot.hasData)
+                ? TabsScreen() // logged in ?
+                : Screen; // not logged in ? login Screen , then if guest , screen will change to tabs automatically :D
+          },
+        ),
+      ),
+    );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prj/Models/Notification.dart';
 import 'package:prj/DummyData.dart';
-import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:prj/Screens/NotificationScreen/HelpingWidgets/notificationItem.dart';
 
@@ -11,26 +10,8 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  List<notification> notifications = currentUser.notifications;
+  List<myNotification> notifications = currentUser.notifications;
   String? emptyMessage;
-
-  @override
-  void initState() {
-    super.initState();
-    if (notifications.isEmpty) {
-      loadEmptyMessage();
-    }
-  }
-
-  Future<void> loadEmptyMessage() async {
-    final String response = await rootBundle.loadString(
-      'assets/json/Welcome.json',
-    );
-    final data = json.decode(response);
-    setState(() {
-      emptyMessage = data["message"] ?? "No notifications yet.";
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
