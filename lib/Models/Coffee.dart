@@ -74,3 +74,5 @@ class Coffee {
         : _smallPrice;
   }
 }
+
+enum filters { isSugary, isDairy, isDecaf, containsNuts, containsCaffeine }

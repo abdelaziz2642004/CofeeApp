@@ -1,12 +1,12 @@
-import 'package:uuid/uuid.dart';
+// import 'package:uuid/uuid.dart';
 
-final Uuid uuid = Uuid();
+// final Uuid uuid = Uuid();
 
-class category {
-  final String _id;
-  final String name;
+// class category {
+//   final String _id;
+//   final String name;
 
-  String get id => _id;
+//   String get id => _id;
 
-  category({required this.name, String? id}) : _id = id ?? uuid.v4();
-}
+//   category({required this.name, String? id}) : _id = id ?? uuid.v4();
+// }
