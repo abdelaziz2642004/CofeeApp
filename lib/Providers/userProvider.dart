@@ -15,12 +15,18 @@ final userProvider = FutureProvider<user>((ref) async {
       throw Exception("No user logged in");
     }
 
+    print("I got here 1");
     String userId = currentUser.uid;
+    print(userId);
 
     DocumentSnapshot userDoc =
         await FirebaseFirestore.instance.collection('Users').doc(userId).get();
 
+    print("I got here 2");
+
     if (!userDoc.exists) {
+      print("I got here 3");
+
       return user(
         id: "",
         email: "",
@@ -75,7 +81,7 @@ Future<List<WishlistItem>> fetchWishlist(
   CollectionReference wishlistRef = FirebaseFirestore.instance
       .collection('Wishlists')
       .doc(userId)
-      .collection('Items');
+      .collection('items');
 
   QuerySnapshot wishlistSnapshot = await wishlistRef.get();
 
@@ -99,7 +105,7 @@ Future<List<myNotification>> fetchNotifications(
   CollectionReference notificationsRef = FirebaseFirestore.instance
       .collection('Notifications')
       .doc(userId)
-      .collection('Items');
+      .collection('items');
 
   QuerySnapshot notificationsSnapshot = await notificationsRef.get();
 
